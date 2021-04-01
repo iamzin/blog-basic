@@ -2,6 +2,7 @@ package com.genie.blog.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,10 +22,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
 
         http.authorizeRequests()
-                // image 폴더를 login 없이 허용
+                .antMatchers("/").permitAll()
+                .antMatchers("/api/**").permitAll()
+                .antMatchers("/detail").permitAll()
+                .antMatchers("/detail/**").permitAll()
                 .antMatchers("/images/**").permitAll()
-                // css 폴더를 login 없이 허용
                 .antMatchers("/css/**").permitAll()
+                .antMatchers("/basic.js").permitAll()
+                .antMatchers("/detail.js").permitAll()
                 .antMatchers("/user/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 // 그 외 모든 요청은 인증과정 필요
@@ -33,12 +38,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/user/login")
                 .failureUrl("/user/login/error")
+                .loginProcessingUrl("/user/login")
                 .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
                 .logout()
                 .logoutUrl("/user/logout")
+                .logoutSuccessUrl("/")
                 .permitAll();
+    }
 
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }

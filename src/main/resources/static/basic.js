@@ -44,6 +44,11 @@ function addHTML(id, username, title, contents, modifiedAt) {
 
 }
 
+function cantPost() {
+    alert("로그인이 필요합니다.");
+    window.location.href = "/user/login";
+}
+
 function postBtn() {
     scrollTo(0, 120);
     $('#cards-box').hide();
@@ -74,18 +79,6 @@ function inputAction() {
     });
 }
 
-function isValidUsername(username) {
-    if (username == '') {
-        alert('이름을 입력해 주세요.');
-        return false;
-    }
-    if (username.trim().length > 20) {
-        alert('공백 포함 20자 이하로 입력해 주세요.')
-        return false;
-    }
-    return true;
-}
-
 function isValidTitle(title) {
     if (title == '') {
         alert('제목을 입력해 주세요.');
@@ -113,9 +106,6 @@ function isValidContents(contents) {
 
 function writePost() {
     let username = $('#username').val();
-    if (isValidUsername(username) == false) {
-        return;
-    }
     let title = $('#title').val();
     if (isValidTitle(title) == false) {
         return;

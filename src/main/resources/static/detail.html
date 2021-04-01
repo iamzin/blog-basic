@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -27,9 +28,9 @@
 <body>
 <nav class="sidenav navbar">
     <div class="blog-container">
-        <!--            <h1 class="bold blog-title">항해99</h1>-->
         <img src="images/hh99.svg" style="size: 20px" class="blog-title">
-        <p class="medium blog-days">항해 일지를 기록해 보세요.</p>
+        <div id="login-username" class="login-username bold">안녕하세요, <span th:text="${username}"></span>님!</div>
+        <div id="blog-days" class="medium blog-days">항해 일지를 기록해 보세요.</div>
     </div>
 </nav>
 
@@ -54,11 +55,17 @@
         </div>
         <div>
         <div class="btn">
-            <img onclick="editBtn()" class="save-btn" src="images/edit.png">
+            <img onclick="editBtn()" class="save-btn" src="images/edit.png"
+                 th:if="${username} != null" th:classappend="not-for-username">
+            <img onclick="editBtn()" class="save-btn" src="images/edit.png"
+                 th:unless="${username} != null" th:classappend="for-username">
             <img onclick="backBtn()" class="cancel-btn" src="images/back.png">
         </div>
         <div class="d-btn">
-            <img onclick="deletePost()" class="delete-btn" src="images/delete.png">
+            <img onclick="deletePost()" class="delete-btn" src="images/delete.png"
+                 th:if="${username} != null" th:classappend="not-for-username">
+            <img onclick="deletePost()" class="delete-btn" src="images/delete.png"
+                 th:unless="${username} != null" th:classappend="for-username">
         </div>
         </div>
     </div>
@@ -89,6 +96,19 @@
     <div id="edit-btn" class="btn">
         <img onclick="saveEdit()" class="save-btn" src="images/save.png">
         <img onclick="cancelEdit()" class="cancel-btn" src="images/cancel.png">
+    </div>
+    <div id="card" class="reply-box">
+        <label>
+            <p class="bold label-txt">REPLY</p>
+            <input id="reply" type="text" class="input">
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+    </div>
+    <div class="btn">
+        <img onclick="writeReply()" class="save-btn" src="images/save.png">
+        <img onclick="cancelReply()" class="cancel-btn" src="images/cancel.png">
     </div>
 </div>
 

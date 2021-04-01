@@ -43,7 +43,13 @@ body {
     min-width: 200px;
     max-width: 200px;
     color: #ff0000;
-    margin: 10px auto auto auto;
+    margin-top: 10px;
+}
+
+.login-username {
+    margin-top: 50px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 25px;
 }
 
 .blog-days {
@@ -52,7 +58,21 @@ body {
     width: 10%;
     min-width: 200px;
     max-width: 200px;
-    margin: 30px auto auto auto;
+    margin-top: 30px;
+}
+
+.loginout-btn {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    color: white !important;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.sign-container {
+    text-align: right;
+    margin-top: 50px;
+    margin-right: 80px;
 }
 
 .blog-body {
@@ -74,6 +94,7 @@ body {
 .post-btn {
     float: right;
     margin: 60px 125px auto auto;
+    color: #202540;
 }
 
 .post-btn-img {
@@ -177,12 +198,22 @@ label {
     transition: ease .3s;
 }
 
-.input {
-    width: 100%;
+.label-name {
+    position: absolute;
+    top: -3em;
     padding: 10px;
-    background: transparent;
-    border: none;
-    outline: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #202540;
+}
+
+.input {
+    width: 100% !important;
+    padding: 10px !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
 }
 
 .line-box {
@@ -192,19 +223,21 @@ label {
     background: #BCBCBC;
 }
 
-.name-input {
+.name-fixed {
     width: 30%;
     padding: 10px;
     background: transparent;
     border: none;
     outline: none;
+
 }
 
 .name-line-box {
     position: relative;
     width: 30%;
     height: 2px;
-    background: #BCBCBC;
+    background: #202540;
+    margin-top: 10px;
 }
 
 .line {
@@ -222,10 +255,6 @@ label {
     width: 100%;
 }
 
-.name-input:focus + .name-line-box .line {
-    width: 100%;
-}
-
 .label-active {
     top: -3em;
 }
@@ -239,9 +268,16 @@ textarea {
     margin-right: 80px;
 }
 
+.for-username {
+    display: none;
+}
+
+.not-for-username {
+}
+
 .save-btn {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     margin-top: 6px;
     margin-right: 17px;
     position: relative;
@@ -252,9 +288,10 @@ textarea {
 }
 
 .cancel-btn {
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
     margin-right: 20px;
+    margin-top: 18px;
     position: relative;
 }
 
@@ -268,8 +305,8 @@ textarea {
 }
 
 .delete-btn {
-    width: 45px;
-    height: 45px;
+    width: 25px;
+    height: 25px;
     margin-top: 6px;
     margin-right: 17px;
     position: relative;
@@ -290,6 +327,11 @@ textarea {
 
 .detail-post-contents {
     white-space: pre-line;
+}
+
+.reply-box {
+    width: 80%;
+    margin: 200px auto 100px auto;
 }
 
 /* edit */

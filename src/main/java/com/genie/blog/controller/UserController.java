@@ -19,7 +19,7 @@ public class UserController {
     }
 
     // 회원 로그인 페이지
-    @GetMapping("user/login")
+    @GetMapping("/user/login")
     public String login() {
         return "login";
     }
@@ -37,9 +37,17 @@ public class UserController {
     }
 
     // 회원 가입 요청 처리
-    @PostMapping("user/signup")
+    @PostMapping("/user/signup")
     public String registerUser(SignupRequestDto requestDto) {
         userService.registerUser(requestDto);
+        return "redirect:/user/login";
+    }
+
+    @GetMapping("/user/kakao/callback")
+    public String kakaoLogin(String code) {
+        // authorizedCode: 카카오 서버로부터 받은 인가 코드
+        userService.kakaoLogin(code);
+
         return "redirect:/";
     }
 }

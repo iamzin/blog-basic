@@ -4,13 +4,14 @@ $(document).ready(function () {
     getDetail(id);
     $('#edit-box').hide();
     $('#edit-btn').hide();
+    inputReply();
 })
 
 function getDetail(id) {
     let idx = id;
     $.ajax({
         type: 'GET',
-        url: `/detail/${idx}`,
+        url: `/api/detail/${idx}`,
         success: function (response) {
             let id = response["id"];
             let username = response["username"];
@@ -97,6 +98,18 @@ function inputAction() {
     });
 }
 
+function inputReply() {
+    $('.input').focus(function () {
+        $(this).parent().find(".label-txt").addClass('label-active');
+    });
+
+    $(".input").focusout(function () {
+        if ($(this).val() == '') {
+            $(this).parent().find(".label-txt").removeClass('label-active');
+        }
+    });
+}
+
 function isValidTitle(title) {
     if (title == '') {
         alert('제목을 입력해 주세요.');
@@ -137,7 +150,7 @@ function saveEdit() {
     console.log(data, id);
     $.ajax({
         type: "PUT",
-        url: `/detail/${id}`,
+        url: `/api/detail/${id}`,
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (response) {
@@ -151,7 +164,7 @@ function deletePost() {
     let id = window.location.search.split("?")[1];
     $.ajax({
         type: "DELETE",
-        url: `/detail/${id}`,
+        url: `/api/detail/${id}`,
         success: function (response) {
             alert('항해 일지를 삭제하였습니다.');
             window.location.href="/";
@@ -165,4 +178,24 @@ function backBtn() {
 
 function cancelEdit() {
     window.location.reload();
+}
+
+// reply
+function writeReply() {
+    let replyUsername = $('#username').val();
+    let reply = $('#reply').val();
+    if (isValidReply(reply) == false) {
+        return;
+    }
+    let data = {'username': username, 'reply':reply};
+
+    $.ajax({
+        type: "POST",
+        url: "/api/reply",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function (response) {
+            window.location.reload();
+        }
+    });
 }

@@ -34,25 +34,33 @@
 <body>
     <nav class="sidenav navbar">
         <div class="blog-container">
-            <!--  <h1 class="bold blog-title">항해99</h1>  -->
             <img src="images/hh99.svg" style="size: 20px" class="blog-title">
-            <span th:text="${username}"></span>
-            <div class="medium blog-days">항해 일지를 기록해 보세요.</div>
-            <a id="logout-text" href="/user/logout">로그아웃</a>
+            <div id="login-username" class="login-username bold">안녕하세요, <span th:text="${username}"></span>님!</div>
+            <div id="blog-days" class="medium blog-days">항해 일지를 기록해 보세요.</div>
         </div>
     </nav>
 
-
+    <div class="sign-container">
+        <a id="signout-btn"class="loginout-btn bold" href="/user/logout"
+           th:if="${username}!=null" th:text="로그아웃"></a>
+        <a id="signup-btn" class="loginout-btn bold" href="/user/signup"
+           th:unless="${username}!=null" th:text="회원가입"></a>
+        <a id="signin-btn" class="loginout-btn bold" href="/user/login"
+           th:unless="${username}!=null" th:text="로그인"></a>
+    </div>
     <div id="blog-list" class="blog-body">
         <div id="post-btn" class="post-btn">
-            <img class="post-btn-img" src="images/postBtn.png" onclick="postBtn()">
+<!--            <img class="post-btn-img" src="images/postBtn.png" onclick="postBtn()">-->
+            <img class="post-btn-img" src="images/postBtn.png"
+                 th:if="${username}!=null" th:onclick="postBtn()">
+            <img class="post-btn-img" src="images/postBtn.png"
+                 th:unless="${username}!=null" th:onclick="cantPost()">
         </div>
         <div id="cards-box" class="post-list">
             <div id="card" class="card">
                 <div class="card-header">
-                    <a href="detail.html"><h5 id="${id}-title" class="card-title">제목</h5></a>
+                    <a class="post-link" href="detail.html"><h5 id="${id}-title" class="card-title">제목</h5></a>
                 </div>
-                <!-- <h5> 안에 <span class="post-new badge rounded-pill bg-warning text-dark">new</span> -->
                 <div class="card-body">
                     <p id="${id}-contents" class="card-text post-contents">내용입니다.</p>
                 </div>
@@ -66,8 +74,8 @@
         <div id="post-box">
             <form class="post-box">
                 <label>
-                    <p class="bold label-txt">YOUR NAME</p>
-                    <input id="username" type="text" class="name-input">
+                    <p class="bold label-name">YOUR NAME</p>
+                    <span id="username" class="name-fixed" th:text="${username}"></span>
                     <div class="name-line-box">
                         <div class="line"></div>
                     </div>
